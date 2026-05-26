@@ -43,7 +43,6 @@ body::before {
   z-index: 0;
 }
 
-/* NAV */
 nav {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -106,7 +105,6 @@ nav {
   transform: translateY(-1px);
 }
 
-/* FLOATING MATH */
 .math-float {
   position: fixed;
   font-family: 'Rajdhani', sans-serif;
@@ -124,7 +122,6 @@ nav {
   100% { transform: translateY(0) rotate(0deg); }
 }
 
-/* HERO */
 #hero {
   min-height: 100vh;
   display: grid;
@@ -258,7 +255,6 @@ nav {
 .hero-formula.tr { top: 8%; right: 4%; }
 .hero-formula.bl { bottom: 8%; left: 4%; }
 
-/* SCROLL REVEAL */
 .reveal {
   opacity: 0;
   transform: translateY(26px);
@@ -266,7 +262,6 @@ nav {
 }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
-/* STATS */
 #stats {
   position: relative;
   z-index: 1;
@@ -307,7 +302,6 @@ nav {
   margin-top: 5px;
 }
 
-/* SECTION LABEL */
 .sec-label {
   display: flex;
   align-items: center;
@@ -342,7 +336,6 @@ nav {
 }
 .sec-title em { font-style: normal; color: var(--neon); }
 
-/* SERVICIOS */
 #servicios {
   position: relative;
   z-index: 1;
@@ -428,7 +421,6 @@ nav {
   text-transform: uppercase;
 }
 
-/* MÉTODO */
 #metodo {
   position: relative;
   z-index: 1;
@@ -516,7 +508,6 @@ nav {
   color: var(--neon);
 }
 
-/* TARIFAS */
 #tarifas {
   position: relative;
   z-index: 1;
@@ -644,7 +635,6 @@ nav {
   flex-shrink: 0;
 }
 
-/* BONOS */
 .bonos-section { margin-top: 44px; }
 .bonos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 22px; }
 .bono-card {
@@ -717,7 +707,6 @@ nav {
 .nota-txt { font-size: 12.5px; color: var(--blanco-dim); line-height: 1.65; }
 .nota-txt strong { color: var(--blanco); font-weight: 600; }
 
-/* TESTIMONIOS */
 #testimonios {
   position: relative;
   z-index: 1;
@@ -782,7 +771,6 @@ nav {
 }
 .test-level { font-size: 10px; color: var(--blanco-dim); font-weight: 300; }
 
-/* CTA BAND */
 #cta-band {
   position: relative;
   z-index: 1;
@@ -827,7 +815,6 @@ nav {
   line-height: 1.65;
 }
 
-/* CONTACTO */
 #contacto {
   position: relative;
   z-index: 1;
@@ -927,7 +914,6 @@ nav {
   transform: translateY(-1px);
 }
 
-/* FOOTER */
 footer {
   position: relative;
   z-index: 1;
@@ -963,7 +949,6 @@ footer {
 .footer-links a:hover { color: var(--neon); }
 .footer-copy { font-size: 11px; color: rgba(240,240,240,0.22); font-weight: 300; }
 
-/* ANIMATIONS */
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -973,7 +958,6 @@ footer {
   to   { opacity: 1; }
 }
 
-/* RESPONSIVE */
 @media (max-width: 1024px) {
   #hero { grid-template-columns: 1fr; padding: 100px 40px 60px; }
   .hero-deco { display: none; }
@@ -1352,15 +1336,6 @@ footer {
 </footer>
 
 <script>
-// Scroll reveal
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
-  });
-}, { threshold: 0.1, rootMargin: '0px 0px -36px 0px' });
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-// Counter animation
 function animateCounter(el) {
   const target = parseInt(el.dataset.target, 10);
   const suffix = el.dataset.suffix || '';
@@ -1373,6 +1348,7 @@ function animateCounter(el) {
     if (p < 1) requestAnimationFrame(tick);
   })(start);
 }
+
 const counterObs = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting && e.target.dataset.target) {
@@ -1381,36 +1357,41 @@ const counterObs = new IntersectionObserver((entries) => {
     }
   });
 }, { threshold: 0.5 });
+
 document.querySelectorAll('[data-target]').forEach(el => counterObs.observe(el));
 
-// Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     const t = document.querySelector(a.getAttribute('href'));
-    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    if (t) { 
+      e.preventDefault(); 
+      t.scrollIntoView({ behavior: 'smooth', block: 'start' }); 
+    }
   });
 });
 
-// Form submit feedback
 document.getElementById('contact-form').addEventListener('submit', e => {
   e.preventDefault();
   const btn = e.target.querySelector('.form-submit');
   
-  -- Cambiamos el texto del botón al estado de éxito
   btn.textContent = '✓ Mensaje enviado — te contactamos pronto';
+  btn.style.cssText = 'background: #0a0a0a; color: var(--neon); border: 1px solid var(--neon); box-shadow: 0 0 15px var(--neon-glow);';
   
-  -- Aplicamos el concepto: Redirección tras 1.5 segundos de espera
-  setTimeout(() => {
-    window.location.href = 'gracias.html';
-  }, 1500);
-});
-
-  const btn = e.target.querySelector('.form-submit');
-  const orig = btn.textContent;
-  btn.textContent = '✓ Mensaje enviado — te contactamos pronto';
-  btn.style.cssText = 'background:#0a0a0a;color:var(--neon);border:1px solid rgba(57,255,20,0.3);clip-path:none;box-shadow:0 0 16px rgba(57,255,20,0.15)';
-  e.target.reset();
-  setTimeout(() => { btn.textContent = orig; btn.style.cssText = ''; }, 4000);
+  fetch("https://formsubmit.co/ajax/info@matemadictos.es", {
+    method: "POST",
+    body: new FormData(e.target)
+  })
+  .then(() => {
+    setTimeout(() => {
+      window.location.href = 'gracias.html';
+    }, 1500);
+  })
+  .catch(err => {
+    console.error(err);
+    setTimeout(() => {
+      window.location.href = 'gracias.html';
+    }, 1500);
+  });
 });
 </script>
 </body>
