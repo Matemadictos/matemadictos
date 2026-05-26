@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mensaje enviado — MATEMADICTOS</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --negro: #0a0a0a;
+  --neon: #39FF14;
+  --neon-glow: rgba(57,255,20,0.35);
+  --blanco: #f0f0f0;
+  --blanco-dim: rgba(240,240,240,0.5);
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--negro);
+  font-family: 'Barlow', sans-serif;
+  color: var(--blanco);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(57,255,20,0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(57,255,20,0.018) 1px, transparent 1px);
+  background-size: 44px 44px;
+  pointer-events: none;
+}
+.wrap {
+  position: relative;
+  z-index: 1;
+  max-width: 520px;
+}
+.ico {
+  font-size: 56px;
+  margin-bottom: 24px;
+  filter: drop-shadow(0 0 20px var(--neon-glow));
+}
+.titulo {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  margin-bottom: 16px;
+}
+.titulo span { color: var(--neon); }
+.sub {
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--blanco-dim);
+  line-height: 1.7;
+  margin-bottom: 40px;
+}
+.btn {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--negro);
+  background: var(--neon);
+  padding: 14px 44px 14px 28px;
+  text-decoration: none;
+  clip-path: polygon(0 0, 100% 0, 95% 100%, 0 100%);
+  transition: box-shadow 0.25s, transform 0.2s;
+  display: inline-block;
+}
+.btn:hover {
+  box-shadow: 0 0 32px var(--neon-glow);
+  transform: translateY(-2px);
+}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="ico">✓</div>
+    <h1 class="titulo">Mensaje<br><span>recibido</span></h1>
+    <p class="sub">Gracias por contactar con MATEMADICTOS. Te responderemos en menos de 24 horas para coordinar tu primera sesión gratuita.</p>
+    <a href="/" class="btn">Volver al inicio →</a>
+  </div>
+</body>
+</html>
