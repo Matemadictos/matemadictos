@@ -1394,11 +1394,16 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 // Form submit feedback
 document.getElementById('contact-form').addEventListener('submit', e => {
   e.preventDefault();
+  const btn = e.target.querySelector('.form-submit');
   
-  fetch("https://formsubmit.co/ajax/info@matemadictos.es", {
-    method: "POST",
-    body: new FormData(e.target)
-  });
+  -- Cambiamos el texto del botón al estado de éxito
+  btn.textContent = '✓ Mensaje enviado — te contactamos pronto';
+  
+  -- Aplicamos el concepto: Redirección tras 1.5 segundos de espera
+  setTimeout(() => {
+    window.location.href = 'gracias.html';
+  }, 1500);
+});
 
   const btn = e.target.querySelector('.form-submit');
   const orig = btn.textContent;
