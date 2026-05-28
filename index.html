@@ -21,6 +21,94 @@
   --blanco-faint: rgba(240,240,240,0.12);
 }
 
+/* ── AVISO PRIVACIDAD ── */
+#aviso-privacidad {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 9999;
+  background: rgba(12,12,12,0.97);
+  border-top: 1px solid rgba(57,255,20,0.22);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 18px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  box-shadow: 0 -4px 32px rgba(0,0,0,0.6);
+  transform: translateY(0);
+  transition: transform 0.4s ease;
+}
+#aviso-privacidad.hidden { transform: translateY(110%); }
+.aviso-text {
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px;
+  color: rgba(240,240,240,0.65);
+  line-height: 1.6;
+  max-width: 820px;
+}
+.aviso-text a {
+  color: var(--neon);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(57,255,20,0.35);
+  transition: border-color 0.2s;
+}
+.aviso-text a:hover { border-color: var(--neon); }
+.btn-aviso-aceptar {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--negro);
+  background: var(--neon);
+  border: none;
+  padding: 10px 28px 10px 20px;
+  cursor: pointer;
+  clip-path: polygon(0 0, 100% 0, 93% 100%, 0 100%);
+  transition: box-shadow 0.2s, transform 0.2s;
+  flex-shrink: 0;
+}
+.btn-aviso-aceptar:hover {
+  box-shadow: 0 0 22px var(--neon-glow);
+  transform: translateY(-1px);
+}
+
+/* ── FOOTER LEGAL ── */
+.footer-legal {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--gris-borde);
+}
+.footer-legal a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: rgba(240,240,240,0.25);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-legal a:hover { color: var(--neon); }
+.footer-seal {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+.footer-seal img {
+  height: 44px;
+  opacity: 0.75;
+  transition: opacity 0.2s;
+  filter: drop-shadow(0 0 6px rgba(57,255,20,0.1));
+}
+.footer-seal img:hover { opacity: 1; }
+
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 
@@ -1332,11 +1420,39 @@ footer {
       <li><a href="#contacto">Contacto</a></li>
     </ul>
     <div class="footer-copy">© 2025 Matemadictos · Santander</div>
+    <nav class="footer-legal" aria-label="Legal">
+      <a href="aviso-legal.pdf" target="_blank" rel="noopener">Aviso Legal</a>
+      <a href="politica-privacidad.pdf" target="_blank" rel="noopener">Política de Privacidad</a>
+    </nav>
+    <div class="footer-seal">
+      <a href='https://www.gruposmz.es/eipd/empresa/entrada/sello.aspx?idE=NzM4OTgz&idC=MjM4ODI=' target="_blank" rel="noopener">
+        <img src='https://www.gruposmz.es/eipd/empresa/images/Sello-Vigila.png' alt='Sistema de protección de datos VigilaMisDatos verificado'/>
+      </a>
+    </div>
   </div>
 </footer>
 
+
+<!-- AVISO PROTECCIÓN DE DATOS -->
+<div id="aviso-privacidad" role="region" aria-label="Aviso de protección de datos">
+  <p class="aviso-text">
+    En cumplimiento del Reglamento (UE) 2016/679 (RGPD) y la Ley Orgánica 3/2018 (LOPDGDD), te informamos de que los datos personales que nos facilites serán tratados por <strong>MATEMADICTOS ACADEMIA</strong> (NIF 04625561P), con domicilio en C/ Blas Cabrera 7, Local 1, Puerta A, Santander, con la finalidad de gestionar tu solicitud. Puedes ejercer tus derechos de acceso, rectificación, supresión y demás escribiendo a <a href="mailto:info@matemadictos.es">info@matemadictos.es</a>. Más información en nuestra <a href="politica-privacidad.pdf" target="_blank" rel="noopener">Política de Privacidad</a>.
+  </p>
+  <button class="btn-aviso-aceptar" id="aviso-aceptar">Entendido →</button>
+</div>
+
 <script>
-function animateCounter(el) {
+(function() {
+  const aviso = document.getElementById('aviso-privacidad');
+  if (localStorage.getItem('matemadictos_aviso_visto')) {
+    aviso.classList.add('hidden');
+  }
+  document.getElementById('aviso-aceptar').addEventListener('click', function() {
+    localStorage.setItem('matemadictos_aviso_visto', '1');
+    aviso.classList.add('hidden');
+  });
+})();
+</script>
   const target = parseInt(el.dataset.target, 10);
   const suffix = el.dataset.suffix || '';
   const start = performance.now();
